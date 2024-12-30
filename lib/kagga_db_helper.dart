@@ -34,8 +34,8 @@ Future<List<Map<String, dynamic>>> getKaggaList(Database db) async {
 
   return List.generate(maps.length, (i) {
     return {
-      'number': maps[i]['kagga_id'].toString(),
-      'content': maps[i]['kagga_kn'],
+      'kagga_id': maps[i]['kagga_id'].toString(),
+      'kagga_kn': maps[i]['kagga_kn'],
     };
   });
 }
