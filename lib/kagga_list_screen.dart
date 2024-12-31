@@ -30,66 +30,66 @@ class KaggaListScreen extends StatelessWidget {
       drawer: const Drawer(
           // Add your drawer contents here
           ),
-      body: ListView.builder(
-        itemCount: kaggaList.length,
-        itemBuilder: (context, index) {
-          print("items in the list ${kaggaList.length}");
-          return KaggaItem(
-            kagga_id: kaggaList[index]['kagga_id']!,
-            content: kaggaList[index]['kagga_kn']!,
-          );
-        },
-      ),
-    );
-  }
-}
-
-class KaggaItem extends StatelessWidget {
-  final String kagga_id;
-  final String content;
-
-  const KaggaItem({super.key, required this.kagga_id, required this.content});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => KaggaDetailsScreen(kagga_id: kagga_id),
-            ),
-          );
-        },
-        child: Card(
-          elevation: 3,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  kagga_id,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    color: Colors.orange,
-                    fontWeight: FontWeight.bold,
+      body: Scrollbar(
+        interactive: true,
+        thumbVisibility: false,
+        child: ListView.separated(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          itemCount: kaggaList.length,
+          separatorBuilder: (context, index) => const SizedBox(height: 8.0),
+          itemBuilder: (context, index) {
+            final kagga = kaggaList[index];
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        KaggaDetailsScreen(kagga_id: kagga['kagga_id']),
+                  ),
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Colors.grey.shade300,
+                    width: 0.7,
                   ),
                 ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(
-                    content,
-                    style: const TextStyle(
-                      fontSize: 16,
-                    ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 40,
+                        child: Center(
+                          child: Text(
+                            kagga['kagga_id'],
+                            style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.orange,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
+                          kagga['kagga_kn'],
+                          style: const TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
