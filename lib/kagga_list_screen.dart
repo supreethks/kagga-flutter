@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kagga_flutter/kagga_details_screen.dart';
+import 'package:kagga_flutter/kagga_pager.dart';
 
 class KaggaListScreen extends StatelessWidget {
   const KaggaListScreen(
@@ -39,13 +39,18 @@ class KaggaListScreen extends StatelessWidget {
           separatorBuilder: (context, index) => const SizedBox(height: 8.0),
           itemBuilder: (context, index) {
             final kagga = kaggaList[index];
+            final kaggaIds = kaggaList
+                .map<int>((kagga) => int.parse(kagga['kagga_id'] as String))
+                .toList();
             return GestureDetector(
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        KaggaDetailsScreen(kaggaId: kagga['kagga_id']),
+                    builder: (context) => KaggaPager(
+                      kaggaIds: kaggaIds,
+                      initialIndex: index,
+                    ),
                   ),
                 );
               },

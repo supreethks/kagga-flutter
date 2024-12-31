@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'kagga_db_helper.dart'; // Import your database helper
 
 class KaggaDetailsScreen extends StatefulWidget {
-  final String kaggaId;
+  final int kaggaId;
 
   const KaggaDetailsScreen({super.key, required this.kaggaId});
 
@@ -25,7 +25,7 @@ class _KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
     });
   }
 
-  Future<Map<String, Object?>> fetchKaggaDetails(String kaggaId) async {
+  Future<Map<String, Object?>> fetchKaggaDetails(int kaggaId) async {
     // Fetch details from the database using kaggaId
     print("Kagga id is $kaggaId");
     return await getKaggaDetails(kaggaId);
@@ -33,69 +33,43 @@ class _KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('ಕಗ್ಗ ${widget.kaggaId}'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.favorite),
-            onPressed: () {
-              // Handle favorite button press
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.share),
-            onPressed: () {
-              // Handle share button press
-            },
-          ),
-        ],
-      ),
-      body: FutureBuilder<Map<String, String>>(
-        future: kaggaDetails,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No details found.'));
-          } else {
-            final details = Map<String, String>.from(snapshot.data!);
-            details.remove('kagga_tatparya_kn');
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(
-                          parent: AlwaysScrollableScrollPhysics()),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          buildKaggaText(details),
-                          buildTranslationSection(details),
-                          buildMeaningSection(details),
-                          buildTatparyaSection(details),
-                          buildVyakhyanaSwitch(details),
-                          buildTransliterationSection(details),
-                        ],
-                      ),
+    return FutureBuilder<Map<String, String>>(
+      future: kaggaDetails,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(child: Text('No details found.'));
+        } else {
+          final details = Map<String, String>.from(snapshot.data!);
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics()),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        buildKaggaText(details),
+                        buildTranslationSection(details),
+                        buildMeaningSection(details),
+                        buildTatparyaSection(details),
+                        buildVyakhyanaSwitch(details),
+                        buildTransliterationSection(details),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            );
-          }
-        },
-      ),
+                ),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -107,7 +81,9 @@ class _KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
   }
 
   Widget buildTranslationSection(Map<String, String> details) {
-    if (details['kagga_eng']?.isNotEmpty ?? false) {
+    if (details['kagga_eng'] != null &&
+        details['kagga_eng'] != 'null' &&
+        details['kagga_eng']!.isNotEmpty) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -128,7 +104,9 @@ class _KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
   }
 
   Widget buildMeaningSection(Map<String, String> details) {
-    if (details['kagga_meaning_kn']?.isNotEmpty ?? false) {
+    if (details['kagga_meaning_kn'] != null &&
+        details['kagga_meaning_kn'] != 'null' &&
+        details['kagga_meaning_kn']!.isNotEmpty) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -149,7 +127,9 @@ class _KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
   }
 
   Widget buildTatparyaSection(Map<String, String> details) {
-    if (details['kagga_tatparya_kn']?.isNotEmpty ?? false) {
+    if (details['kagga_tatparya_kn'] != null &&
+        details['kagga_tatparya_kn'] != 'null' &&
+        details['kagga_tatparya_kn']!.isNotEmpty) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -170,7 +150,9 @@ class _KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
   }
 
   Widget buildVyakhyanaSwitch(Map<String, String> details) {
-    if (details['kagga_vyakhyana_kn']?.isNotEmpty ?? false) {
+    if (details['kagga_vyakhyana_kn'] != null &&
+        details['kagga_vyakhyana_kn'] != 'null' &&
+        details['kagga_vyakhyana_kn']!.isNotEmpty) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -181,8 +163,9 @@ class _KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
               Text(
                 'ವ್ಯಾಖ್ಯಾನ ತೋರಿಸು',
                 style:
-                    TextStyle(fontSize: sectionTitleSize, color: Colors.orange),
+                    TextStyle(fontSize: contentTextSize, color: Colors.orange),
               ),
+              const SizedBox(width: 8),
               Switch(
                 value: isSwitchOn,
                 onChanged: (bool value) {
@@ -214,7 +197,9 @@ class _KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
   }
 
   Widget buildTransliterationSection(Map<String, String> details) {
-    if (details['kagga_latn']?.isNotEmpty ?? false) {
+    if (details['kagga_latn'] != null &&
+        details['kagga_latn'] != 'null' &&
+        details['kagga_latn']!.isNotEmpty) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -225,7 +210,7 @@ class _KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            details['kagga_latn'] ?? '',
+            details['kagga_latn']!,
             style: TextStyle(fontSize: contentTextSize, color: Colors.grey),
           ),
         ],
