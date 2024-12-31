@@ -39,3 +39,10 @@ Future<List<Map<String, dynamic>>> getKaggaList(Database db) async {
     };
   });
 }
+
+Future<Map<String, Object?>> getKaggaDetails(String kaggaId) async {
+  final db = await initializeDatabase();
+  final maps =
+      await db.query('mankutimma', where: 'kagga_id = ?', whereArgs: [kaggaId]);
+  return maps.isNotEmpty ? maps[0] : {};
+}

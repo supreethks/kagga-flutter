@@ -45,7 +45,7 @@ class KaggaListScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        KaggaDetailsScreen(kagga_id: kagga['kagga_id']),
+                        KaggaDetailsScreen(kaggaId: kagga['kagga_id']),
                   ),
                 );
               },
