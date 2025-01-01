@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:kagga_flutter/kagga_db_helper.dart';
-import 'package:kagga_flutter/kagga_list_screen.dart';
+import 'package:kagga/kagga_db_helper.dart';
+import 'package:kagga/kagga_list_screen.dart';
 import 'package:sqflite/sqflite.dart';
 
 void main() async {
