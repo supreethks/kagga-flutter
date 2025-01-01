@@ -1,7 +1,7 @@
 name: kagga_flutter
 description: "A new Flutter project."
 publish_to: 'none'
-version: 0.1.0
+version: 2.0.1
 
 environment:
   sdk: ^3.5.1
@@ -11,11 +11,20 @@ dependencies:
     sdk: flutter
   sqflite: ^2.4.0
   path: ^1.9.0
+  flutter_platform_widgets: ^7.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.12.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/kagga_icon.png"
+  min_sdk_android: 21
+  prefix: ""
 
 flutter:
   uses-material-design: true

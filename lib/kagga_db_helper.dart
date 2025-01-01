@@ -14,16 +14,13 @@ Future<Database> initializeDatabase() async {
 
   if (!exists) {
     // If it doesn't exist, copy it from the assets
-    print('Copying database from assets');
     ByteData data = await rootBundle.load('assets/kagga_v5.sqlite');
     List<int> bytes =
         data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
     // Write and flush the bytes to the file
     await File(path).writeAsBytes(bytes, flush: true);
-  } else {
-    print('Opening existing database');
-  }
+  } else {}
 
   // Open the database
   return await openDatabase(path);

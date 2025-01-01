@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'kagga_db_helper.dart'; // Import your database helper
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class KaggaDetailsScreen extends StatefulWidget {
   final int kaggaId;
@@ -7,10 +8,10 @@ class KaggaDetailsScreen extends StatefulWidget {
   const KaggaDetailsScreen({super.key, required this.kaggaId});
 
   @override
-  _KaggaDetailsScreenState createState() => _KaggaDetailsScreenState();
+  KaggaDetailsScreenState createState() => KaggaDetailsScreenState();
 }
 
-class _KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
+class KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
   late Future<Map<String, String>> kaggaDetails;
   bool isSwitchOn = false;
 
@@ -27,7 +28,6 @@ class _KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
 
   Future<Map<String, Object?>> fetchKaggaDetails(int kaggaId) async {
     // Fetch details from the database using kaggaId
-    print("Kagga id is $kaggaId");
     return await getKaggaDetails(kaggaId);
   }
 
@@ -74,9 +74,14 @@ class _KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
   }
 
   Widget buildKaggaText(Map<String, String> details) {
-    return Text(
-      details['kagga_kn']!,
-      style: TextStyle(fontSize: contentTextSize),
+    return Column(
+      children: [
+        const SizedBox(height: 16),
+        Text(
+          details['kagga_kn']!,
+          style: TextStyle(fontSize: contentTextSize),
+        ),
+      ],
     );
   }
 
@@ -166,7 +171,7 @@ class _KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
                     TextStyle(fontSize: contentTextSize, color: Colors.orange),
               ),
               const SizedBox(width: 8),
-              Switch(
+              PlatformSwitch(
                 value: isSwitchOn,
                 onChanged: (bool value) {
                   setState(() {

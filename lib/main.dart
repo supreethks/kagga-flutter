@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:kagga_flutter/kagga_db_helper.dart';
 import 'package:kagga_flutter/kagga_list_screen.dart';
 import 'package:sqflite/sqflite.dart';
@@ -7,7 +8,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Database db = await initializeDatabase();
   List<Map<String, dynamic>> kaggaList = await getKaggaList(db);
-  print("items in the list ${kaggaList.length}");
   runApp(KaggaApp(kaggaList: kaggaList));
 }
 
@@ -19,13 +19,10 @@ class KaggaApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Kagga',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrangeAccent),
-        useMaterial3: true,
+    return PlatformApp(
+      home: PlatformScaffold(
+        body: KaggaListScreen(title: 'ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗ', kaggaList: kaggaList),
       ),
-      home: KaggaListScreen(title: 'ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗ', kaggaList: kaggaList),
     );
   }
 }
