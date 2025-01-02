@@ -33,6 +33,19 @@ class KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final titleStyle = textTheme.titleSmall?.copyWith(
+      fontSize: sectionTitleSize,
+      color: Colors.orange,
+    );
+    final bodyStyle = textTheme.bodyLarge?.copyWith(
+      fontSize: contentTextSize,
+    );
+    final transliterationStyle = textTheme.bodyLarge?.copyWith(
+      fontSize: contentTextSize,
+      color: Colors.grey,
+    );
+
     return FutureBuilder<Map<String, String>>(
       future: kaggaDetails,
       builder: (context, snapshot) {
@@ -55,12 +68,13 @@ class KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        buildKaggaText(details),
-                        buildTranslationSection(details),
-                        buildMeaningSection(details),
-                        buildTatparyaSection(details),
-                        buildVyakhyanaSwitch(details),
-                        buildTransliterationSection(details),
+                        buildKaggaText(details, bodyStyle),
+                        buildTranslationSection(details, titleStyle, bodyStyle),
+                        buildMeaningSection(details, titleStyle, bodyStyle),
+                        buildTatparyaSection(details, titleStyle, bodyStyle),
+                        buildVyakhyanaSwitch(details, titleStyle, bodyStyle),
+                        buildTransliterationSection(
+                            details, titleStyle, transliterationStyle),
                       ],
                     ),
                   ),
@@ -73,19 +87,17 @@ class KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
     );
   }
 
-  Widget buildKaggaText(Map<String, String> details) {
+  Widget buildKaggaText(Map<String, String> details, TextStyle? style) {
     return Column(
       children: [
         const SizedBox(height: 16),
-        Text(
-          details['kagga_kn']!,
-          style: TextStyle(fontSize: contentTextSize),
-        ),
+        Text(details['kagga_kn']!, style: style),
       ],
     );
   }
 
-  Widget buildTranslationSection(Map<String, String> details) {
+  Widget buildTranslationSection(Map<String, String> details,
+      TextStyle? titleStyle, TextStyle? bodyStyle) {
     if (details['kagga_eng'] != null &&
         details['kagga_eng'] != 'null' &&
         details['kagga_eng']!.isNotEmpty) {
@@ -93,22 +105,17 @@ class KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16),
-          Text(
-            'Translation',
-            style: TextStyle(fontSize: sectionTitleSize, color: Colors.orange),
-          ),
+          Text('Translation', style: titleStyle),
           const SizedBox(height: 8),
-          Text(
-            details['kagga_eng']!,
-            style: TextStyle(fontSize: contentTextSize),
-          ),
+          Text(details['kagga_eng']!, style: bodyStyle),
         ],
       );
     }
     return const SizedBox.shrink();
   }
 
-  Widget buildMeaningSection(Map<String, String> details) {
+  Widget buildMeaningSection(Map<String, String> details, TextStyle? titleStyle,
+      TextStyle? bodyStyle) {
     if (details['kagga_meaning_kn'] != null &&
         details['kagga_meaning_kn'] != 'null' &&
         details['kagga_meaning_kn']!.isNotEmpty) {
@@ -116,22 +123,17 @@ class KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16),
-          Text(
-            'ವಾಚ್ಯಾರ್ಥ',
-            style: TextStyle(fontSize: sectionTitleSize, color: Colors.orange),
-          ),
+          Text('ವಾಚ್ಯಾರ್ಥ', style: titleStyle),
           const SizedBox(height: 8),
-          Text(
-            details['kagga_meaning_kn']!,
-            style: TextStyle(fontSize: contentTextSize),
-          ),
+          Text(details['kagga_meaning_kn']!, style: bodyStyle),
         ],
       );
     }
     return const SizedBox.shrink();
   }
 
-  Widget buildTatparyaSection(Map<String, String> details) {
+  Widget buildTatparyaSection(Map<String, String> details,
+      TextStyle? titleStyle, TextStyle? bodyStyle) {
     if (details['kagga_tatparya_kn'] != null &&
         details['kagga_tatparya_kn'] != 'null' &&
         details['kagga_tatparya_kn']!.isNotEmpty) {
@@ -139,22 +141,17 @@ class KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16),
-          Text(
-            'ಭಾವಾರ್ಥ',
-            style: TextStyle(fontSize: sectionTitleSize, color: Colors.orange),
-          ),
+          Text('ಭಾವಾರ್ಥ', style: titleStyle),
           const SizedBox(height: 8),
-          Text(
-            details['kagga_tatparya_kn']!,
-            style: TextStyle(fontSize: contentTextSize),
-          ),
+          Text(details['kagga_tatparya_kn']!, style: bodyStyle),
         ],
       );
     }
     return const SizedBox.shrink();
   }
 
-  Widget buildVyakhyanaSwitch(Map<String, String> details) {
+  Widget buildVyakhyanaSwitch(Map<String, String> details,
+      TextStyle? titleStyle, TextStyle? bodyStyle) {
     if (details['kagga_vyakhyana_kn'] != null &&
         details['kagga_vyakhyana_kn'] != 'null' &&
         details['kagga_vyakhyana_kn']!.isNotEmpty) {
@@ -165,11 +162,7 @@ class KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'ವ್ಯಾಖ್ಯಾನ ತೋರಿಸು',
-                style:
-                    TextStyle(fontSize: contentTextSize, color: Colors.orange),
-              ),
+              Text('ವ್ಯಾಖ್ಯಾನ ತೋರಿಸು', style: titleStyle),
               const SizedBox(width: 8),
               PlatformSwitch(
                 value: isSwitchOn,
@@ -184,16 +177,9 @@ class KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
           ),
           if (isSwitchOn) ...[
             const SizedBox(height: 16),
-            Text(
-              'ವ್ಯಾಖ್ಯಾನ',
-              style:
-                  TextStyle(fontSize: sectionTitleSize, color: Colors.orange),
-            ),
+            Text('ವ್ಯಾಖ್ಯಾನ', style: titleStyle),
             const SizedBox(height: 8),
-            Text(
-              details['kagga_vyakhyana_kn']!,
-              style: TextStyle(fontSize: contentTextSize),
-            ),
+            Text(details['kagga_vyakhyana_kn']!, style: bodyStyle),
           ],
         ],
       );
@@ -201,7 +187,8 @@ class KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
     return const SizedBox.shrink();
   }
 
-  Widget buildTransliterationSection(Map<String, String> details) {
+  Widget buildTransliterationSection(Map<String, String> details,
+      TextStyle? titleStyle, TextStyle? transliterationStyle) {
     if (details['kagga_latn'] != null &&
         details['kagga_latn'] != 'null' &&
         details['kagga_latn']!.isNotEmpty) {
@@ -209,15 +196,9 @@ class KaggaDetailsScreenState extends State<KaggaDetailsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16),
-          Text(
-            'Transliteration',
-            style: TextStyle(fontSize: sectionTitleSize, color: Colors.orange),
-          ),
+          Text('Transliteration', style: titleStyle),
           const SizedBox(height: 8),
-          Text(
-            details['kagga_latn']!,
-            style: TextStyle(fontSize: contentTextSize, color: Colors.grey),
-          ),
+          Text(details['kagga_latn']!, style: transliterationStyle),
         ],
       );
     }

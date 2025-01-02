@@ -86,3 +86,4 @@ android/app/.gradle
 **/macos/**/xcuserdata
 **/macos/.generated/
 **/macos/Flutter/ephemeral/
+macos/Flutter/GeneratedPluginRegistrant.swift

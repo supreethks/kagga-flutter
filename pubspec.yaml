@@ -18,6 +18,7 @@ dependencies:
   webview_flutter: ^4.7.0
   url_launcher: ^6.1.14
   share_plus: ^7.2.1
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
@@ -37,6 +38,7 @@ flutter:
   assets:
     - assets/kagga_v5.sqlite
     - assets/images/
+    - assets/images/favorite_thumb.png
   generate: true
 
 l10n:
