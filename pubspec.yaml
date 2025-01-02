@@ -1,7 +1,7 @@
 name: kagga
 description: "Access all Mankutimmana kagga in a simple app"
 publish_to: 'none'
-version: 2.0.1
+version: 2.0.2+5
 
 environment:
   sdk: ^3.5.1

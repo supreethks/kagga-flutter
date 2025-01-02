@@ -12,7 +12,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = 'com.example.kagga_flutter'
+    namespace = 'com.halagebalapa.mankutimma'
     compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
