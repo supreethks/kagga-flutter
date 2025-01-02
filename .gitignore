@@ -44,3 +44,45 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 ios/build
+android/app/.gradle
+
+# iOS/Flutter specific
+**/ios/**/Pods/
+**/ios/**/.symlinks/
+**/ios/**/profile
+**/ios/**/xcuserdata
+**/ios/.generated/
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+
+# Windows specific
+**/windows/**/Generated.props
+**/windows/**/Generated.targets
+**/windows/**/flutter/generated_plugin_registrant.*
+**/windows/**/flutter/generated_plugins.cmake
+**/windows/flutter/ephemeral/
+
+# macOS specific
+**/macos/Flutter/ephemeral/
+**/macos/Flutter/GeneratedPluginRegistrant.*
+**/macos/Flutter/Flutter-Generated.xcconfig
+**/macos/**/Pods/
+**/macos/**/*.mode1v3
+**/macos/**/*.mode2v3
+**/macos/**/*.moved-aside
+**/macos/**/*.pbxuser
+**/macos/**/*.perspectivev3
+**/macos/**/*sync/
+**/macos/**/.sconsign.dblite
+**/macos/**/.tags*
+**/macos/**/.vagrant/
+**/macos/**/DerivedData/
+**/macos/**/Icon?
+**/macos/**/Pods/
+**/macos/**/.symlinks/
+**/macos/**/profile
+**/macos/**/xcuserdata
+**/macos/.generated/
+**/macos/Flutter/ephemeral/
