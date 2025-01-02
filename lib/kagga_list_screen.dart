@@ -3,6 +3,7 @@ import 'package:kagga/kagga_db_helper.dart';
 import 'package:kagga/kagga_pager.dart';
 import 'drawer/about_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'drawer/contact_screen.dart';
 
 class KaggaListScreen extends StatelessWidget {
   const KaggaListScreen(
@@ -134,9 +135,15 @@ class KaggaListDrawer extends StatelessWidget {
                 },
               ),
               ListTile(
-                title: Text('ಸಂಪರ್ಕಿಸಿ'),
+                title: const Text('ಸಂಪರ್ಕಿಸಿ'),
                 onTap: () {
-                  // Handle the tap
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ContactScreen(title: 'ಸಂಪರ್ಕಿಸಿ'),
+                    ),
+                  );
                 },
               ),
               ListTile(
