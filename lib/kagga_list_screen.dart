@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kagga/kagga_db_helper.dart';
 import 'package:kagga/kagga_pager.dart';
-import 'drawer/about_screen.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'drawer/contact_screen.dart';
+import 'package:kagga/drawer/drawer.dart';
 
 class KaggaListScreen extends StatelessWidget {
   const KaggaListScreen(
@@ -90,122 +87,6 @@ class KaggaListScreen extends StatelessWidget {
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-class KaggaListDrawer extends StatelessWidget {
-  const KaggaListDrawer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Column(
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.grey[800],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗ',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              ListTile(
-                title: Text('ಕುರಿತು'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AboutScreen(title: 'ಕುರಿತು'),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                title: const Text('ಸಂಪರ್ಕಿಸಿ'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ContactScreen(title: 'ಸಂಪರ್ಕಿಸಿ'),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text('ದಿನಕ್ಕೊಂದು ಕಗ್ಗ ನೋಟಿಫಿಕೇಶನ್'),
-                trailing: Switch(
-                  value: true, // Set the initial value
-                  onChanged: (bool value) {
-                    // Handle the switch toggle
-                  },
-                  activeColor: Colors.orange,
-                ),
-              ),
-              ListTile(
-                title: Text('ರೇಟ್ ಮಾಡಿ'),
-                onTap: () {
-                  // Handle the tap
-                },
-              ),
-              ListTile(
-                title: Text('ಗೆಳೆಯರಿಗೆ ಪರಿಚಯಿಸಿ'),
-                onTap: () {
-                  // Handle the tap
-                },
-              ),
-            ],
-          ),
-          FutureBuilder<PackageInfo>(
-            future: PackageInfo.fromPlatform(),
-            builder: (context, snapshot) {
-              return FutureBuilder<int>(
-                future: getDatabaseVersion(),
-                builder: (context, dbSnapshot) {
-                  if (snapshot.hasData && dbSnapshot.hasData) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                'ಆವೃತ್ತಿ ${snapshot.data!.version}',
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                              Text(
-                                'Db: ${dbSnapshot.data}',
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                              const SizedBox(height: 16),
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
-                  }
-                  return const SizedBox();
-                },
-              );
-            },
-          ),
-        ],
       ),
     );
   }

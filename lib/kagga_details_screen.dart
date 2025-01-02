@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'kagga_db_helper.dart'; // Import your database helper
+import 'db/kagga_db_helper.dart'; // Import your database helper
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class KaggaDetailsScreen extends StatefulWidget {
