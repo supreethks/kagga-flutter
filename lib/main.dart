@@ -1,5 +1,5 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:kagga/kagga_db_helper.dart';
 import 'package:kagga/kagga_list_screen.dart';
 import 'package:sqflite/sqflite.dart';
@@ -19,10 +19,14 @@ class KaggaApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return PlatformApp(
-      home: PlatformScaffold(
-        body: KaggaListScreen(title: 'ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗ', kaggaList: kaggaList),
-      ),
+    return MaterialApp(
+      title: 'ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗ',
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      home: KaggaListScreen(title: 'ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗ', kaggaList: kaggaList),
     );
   }
 }

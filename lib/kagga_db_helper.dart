@@ -26,6 +26,13 @@ Future<Database> initializeDatabase() async {
   return await openDatabase(path);
 }
 
+Future<int> getDatabaseVersion() async {
+  final db = await initializeDatabase();
+  final version = await db.query('sqlite_master',
+      where: 'type = ? AND name = ?', whereArgs: ['table', 'mankutimma']);
+  return version.length;
+}
+
 Future<List<Map<String, dynamic>>> getKaggaList(Database db) async {
   final List<Map<String, dynamic>> maps = await db.query('mankutimma');
 
