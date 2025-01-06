@@ -1,7 +1,7 @@
 name: kagga
 description: "Access all Mankutimmana kagga in a simple app"
 publish_to: 'none'
-version: 2.1.0+24
+version: 2.1.1+26
 
 environment:
   sdk: ^3.5.1
@@ -14,7 +14,7 @@ dependencies:
   flutter_platform_widgets: ^7.0.1
   flutter_localizations:
     sdk: flutter
-  package_info_plus: ^5.0.1
+  package_info_plus: ^8.1.2
   webview_flutter: ^4.7.0
   url_launcher: ^6.1.14
   share_plus: ^7.2.1
