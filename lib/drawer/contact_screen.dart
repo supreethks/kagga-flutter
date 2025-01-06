@@ -82,7 +82,7 @@ class ContactScreen extends StatelessWidget {
                         ..onTap = () => _launchEmail(context),
                     ),
                     const TextSpan(
-                        text: ' (karnam [dot] supreeth [at] gmail [dot] com).'),
+                        text: ' (karnamsupreeth [at] gmail [dot] com).'),
                   ],
                 ),
               ),

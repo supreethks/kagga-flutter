@@ -96,16 +96,6 @@ class KaggaListDrawer extends StatelessWidget {
                 },
               ),
               ListTile(
-                title: Text('ದಿನಕ್ಕೊಂದು ಕಗ್ಗ ನೋಟಿಫಿಕೇಶನ್'),
-                trailing: Switch(
-                  value: true, // Set the initial value
-                  onChanged: (bool value) {
-                    // Handle the switch toggle
-                  },
-                  activeColor: Colors.orange,
-                ),
-              ),
-              ListTile(
                 title: Text('ರೇಟ್ ಮಾಡಿ'),
                 onTap: () {
                   Navigator.pop(context); // Close drawer first
