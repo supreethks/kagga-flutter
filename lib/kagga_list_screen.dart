@@ -223,7 +223,7 @@ class _KaggaListScreenState extends State<KaggaListScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   SizedBox(
-                                    width: 40,
+                                    width: 35,
                                     child: Column(
                                       children: [
                                         Text(
@@ -247,7 +247,7 @@ class _KaggaListScreenState extends State<KaggaListScreen> {
                                   Expanded(
                                     child: Text(
                                       kagga['kagga_kn'],
-                                      style: const TextStyle(fontSize: 15),
+                                      style: const TextStyle(fontSize: 14),
                                     ),
                                   ),
                                 ],

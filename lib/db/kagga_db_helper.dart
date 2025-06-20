@@ -1,8 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import '../models/kagga.dart';
 
 Future<Database> initializeDatabase() async {
   // Get the path to the documents directory.
@@ -131,4 +131,20 @@ List<String> _getCommonVariations(String query) {
   }
 
   return variations;
+}
+
+// New method for notifications
+Future<Kagga> getKagga(int kaggaId) async {
+  final db = await initializeDatabase();
+  final maps = await db.query(
+    'mankutimma',
+    where: 'kagga_id = ?',
+    whereArgs: [kaggaId],
+  );
+
+  if (maps.isEmpty) {
+    throw Exception('Kagga not found');
+  }
+
+  return Kagga.fromMap(maps.first);
 }

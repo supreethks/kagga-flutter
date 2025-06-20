@@ -5,9 +5,56 @@ import '../utils/app_rating.dart';
 import 'about_screen.dart';
 import 'contact_screen.dart';
 import '../utils/share_app.dart';
+import '../services/notification_service.dart';
 
-class KaggaListDrawer extends StatelessWidget {
+class KaggaListDrawer extends StatefulWidget {
   const KaggaListDrawer({super.key});
+
+  @override
+  State<KaggaListDrawer> createState() => _KaggaListDrawerState();
+}
+
+class _KaggaListDrawerState extends State<KaggaListDrawer> {
+  final _notificationService = NotificationService();
+  bool _notificationsEnabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadNotificationState();
+  }
+
+  Future<void> _loadNotificationState() async {
+    try {
+      final enabled = await _notificationService.isEnabled();
+      if (mounted) {
+        // Check if widget is still mounted
+        setState(() {
+          _notificationsEnabled = enabled;
+        });
+      }
+    } catch (e) {
+      debugPrint('Error loading notification state: $e');
+    }
+  }
+
+  Future<void> _onNotificationToggle(bool value) async {
+    try {
+      setState(() {
+        // Show loading state
+        _notificationsEnabled = value;
+      });
+
+      await _notificationService.toggleNotifications(value);
+
+      // Reload the actual state after toggle
+      await _loadNotificationState();
+    } catch (e) {
+      debugPrint('Error toggling notifications: $e');
+      // Ensure we reload the state even if there's an error
+      await _loadNotificationState();
+    }
+  }
 
   Widget _buildVersionInfo() {
     return FutureBuilder<PackageInfo>(
@@ -96,16 +143,24 @@ class KaggaListDrawer extends StatelessWidget {
                 },
               ),
               ListTile(
+                title: Text('ದಿನಕ್ಕೊಂದು ಕಗ್ಗ ನೋಟಿಫಿಕೇಶನ್'),
+                trailing: Switch(
+                  value: _notificationsEnabled,
+                  onChanged: _onNotificationToggle,
+                  activeColor: Colors.orange,
+                ),
+              ),
+              ListTile(
                 title: Text('ರೇಟ್ ಮಾಡಿ'),
                 onTap: () {
-                  Navigator.pop(context); // Close drawer first
+                  Navigator.pop(context);
                   AppRating.launchStoreUrl(context);
                 },
               ),
               ListTile(
                 title: Text('ಗೆಳೆಯರಿಗೆ ಪರಿಚಯಿಸಿ'),
                 onTap: () {
-                  Navigator.pop(context); // Close drawer first
+                  Navigator.pop(context);
                   ShareApp.share(context);
                 },
               ),

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "774116593688",
+    "firebase_url": "https://mankutimmana-kagga.firebaseio.com",
+    "project_id": "mankutimmana-kagga",
+    "storage_bucket": "mankutimmana-kagga.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774116593688:android:c530cad01505dd4e",
+        "android_client_info": {
+          "package_name": "com.halagebalapa.mankutimma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "774116593688-8r00dols5t08gt3oq042q9lestqpu5fg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM2_ss60isL5eXzw2UoS1P5lQ-A_Wtkmg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
